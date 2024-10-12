@@ -6,7 +6,7 @@ from network_as_code.models.device import DeviceIpv4Addr
 
 def main():
     device = get_device()
-    get_distance("40.7128,-74.0060", "34.0522,-118.2437")
+    print(get_distance_time("40.7128,-74.0060", "34.0522,-118.2437"))
 
 
 def get_device():
@@ -37,7 +37,7 @@ def get_location(device):
     latitude = location.latitude
     return f'{longitude}, {latitude}'
 
-def get_distance(location1, location2):
+def get_distance_time(location1, location2):
     load_dotenv()
     google_token = os.getenv('GOOGLE_API_KEY')
     url = f'https://maps.googleapis.com/maps/api/distancematrix/json?origins={location1}&destinations={location2}&key={google_token}'
@@ -50,7 +50,7 @@ def get_distance(location1, location2):
     if data['status'] == 'OK':
         distance = data['rows'][0]['elements'][0]['distance']['text']
         duration = data['rows'][0]['elements'][0]['duration']['text']
-        print(f"Distance: {distance}, Duration: {duration}")
+        return distance, duration
     else:
         print("Error in request")
 
