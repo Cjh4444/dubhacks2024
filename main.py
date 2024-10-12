@@ -1,6 +1,6 @@
 import os
 import network_as_code as nac
-import dotenv as load_dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
 
